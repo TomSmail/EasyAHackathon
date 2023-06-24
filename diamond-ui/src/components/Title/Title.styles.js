@@ -5,6 +5,7 @@ const TitleWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #52616b;
 `;
 
 const styles = { TitleWrapper };

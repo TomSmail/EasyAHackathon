@@ -1,13 +1,16 @@
 import "./App.css";
 import { Footbar } from "./components/Footbar/Footbar";
+import { Map } from "./components/Map/Map";
 import { NavBar } from "./components/NavBar/NavBar";
-import { Title } from "./components/Title/Title";
+import { SearchBar } from "./components/SearchBar/SearchBar";
+// import { Title } from "./components/Title/Title";
 
 function App() {
   return (
     <div className="App">
       <NavBar />
-      <Title />
+      <SearchBar />
+      <Map />
       <Footbar />
     </div>
   );

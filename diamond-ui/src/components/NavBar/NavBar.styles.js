@@ -15,7 +15,7 @@ const LinkWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: #f9e6e6;
   margin-right: 50px;
   gap: 30px;
 `;
