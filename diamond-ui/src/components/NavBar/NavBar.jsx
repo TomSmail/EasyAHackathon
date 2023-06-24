@@ -4,11 +4,11 @@ import styles from "./NavBar.styles";
 export const NavBar = () => {
   return (
     <styles.NavBarWrapper>
-      <img class="logo" src={logo} alt="Diamond logo" />
+      <img className="logo" src={logo} alt="Diamond logo" />
       <styles.LinkWrapper>
-        <div class="home">Home</div>
-        <div class="record">Record</div>
-        <div class="contact">Contact</div>
+        <div className="home">Home</div>
+        <div className="record">Record</div>
+        <div className="contact">Contact</div>
       </styles.LinkWrapper>
     </styles.NavBarWrapper>
   );

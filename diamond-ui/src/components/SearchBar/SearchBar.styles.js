@@ -17,9 +17,16 @@ const SearchBarContainer = styled.div`
   padding: 5px;
 `;
 
-const SearchIcon = styled.span`
-  color: #aaa;
+const SearchIcon = styled.svg`
   margin: 0 10px;
+`;
+
+const SearchButton = styled.button`
+  background-color: transparent;
+  border: none;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -38,6 +45,7 @@ const styles = {
   SearchBarContainer,
   SearchIcon,
   SearchInput,
+  SearchButton,
 };
 
 export default styles;
