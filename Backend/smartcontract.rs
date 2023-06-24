@@ -10,7 +10,15 @@ pub struct Diamond {
     is_responsibly_sourced: bool,
     has_fair_labor_practices: bool,
     weight: u32,
-    purchase_location: String, // New field for purchase location
+    ownership_history: Vec<OwnershipChange>, // New field for ownership history
+}
+
+#[derive(Debug, PartialEq, Eq, scale::Encode, scale::Decode)]
+#[cfg_attr(feature = "ink-generate-abi", derive(type_metadata::Metadata))]
+pub struct OwnershipChange {
+    previous_owner: AccountId,
+    previous_location: String, // New field for previous owner's location
+    timestamp: u64,
 }
 
 #[contract]
@@ -30,6 +38,7 @@ pub mod diamond_traceability {
             }
         }
 
+        /// Register a new diamond with the provided information.
         #[ink(message)]
         pub fn register_diamond(
             &mut self,
@@ -39,15 +48,15 @@ pub mod diamond_traceability {
             is_responsibly_sourced: bool,
             has_fair_labor_practices: bool,
             weight: u32,
-            purchase_location: String, // Added purchase location parameter
+            purchase_location: String,
         ) {
-            // Check if diamond with the given ID is already registered
             assert!(
                 !self.diamonds.contains_key(&diamond_id),
                 "Diamond with this ID already registered"
             );
 
-            // Create a new Diamond struct with the provided information
+            let ownership_history = Vec::new(); // Initialize ownership history as an empty vector
+
             let diamond = Diamond {
                 diamond_id,
                 origin,
@@ -56,29 +65,42 @@ pub mod diamond_traceability {
                 is_responsibly_sourced,
                 has_fair_labor_practices,
                 weight,
-                purchase_location, // Set the purchase location
+                ownership_history,
             };
 
-            // Insert the diamond into the hashmap using its ID as the key
             self.diamonds.insert(diamond_id, diamond);
         }
 
+        /// Transfer ownership of a diamond to a new owner.
         #[ink(message)]
-        pub fn transfer_ownership(&mut self, diamond_id: u32, new_owner: AccountId) {
-            // Retrieve the diamond with the given ID
+        pub fn transfer_ownership(&mut self, diamond_id: u32, new_owner: AccountId, new_location: String) {
             let diamond = self
                 .diamonds
                 .get_mut(&diamond_id)
                 .expect("Diamond with this ID does not exist");
 
-            // Check if the caller is the current owner of the diamond
             assert_eq!(
                 diamond.current_owner,
                 Self::env().caller(),
                 "You are not the current owner of this diamond"
             );
 
-            // Update the current owner of the diamond
+            // Capture the previous owner and previous location
+            let previous_owner = diamond.current_owner;
+            let previous_location = diamond
+                .ownership_history
+                .last()
+                .map(|change| change.previous_location.clone())
+                .unwrap_or_else(|| String::new());
+
+            // Create a new ownership change event and add it to the ownership history
+            diamond.ownership_history.push(OwnershipChange {
+                previous_owner,
+                previous_location,
+                timestamp: Self::env().block_timestamp(),
+            });
+
+            // Update the current owner and location
             diamond.current_owner = new_owner;
         }
 
