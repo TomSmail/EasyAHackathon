@@ -62,7 +62,7 @@ pub mod contract {
             purchase_location: String,
         ) -> Diamond {
             assert!(
-                !self.diamonds.contains(&diamond_id),
+                !self.diamonds.contains(diamond_id),
                 "Diamond with this ID already registered"
             );
 
@@ -80,12 +80,59 @@ pub mod contract {
                 ownership_history,
             };
 
-            self.diamonds.insert(diamond_id, &diamond);
+            self.diamonds.insert(&diamond_id, &diamond);
 
             diamond
         }
 
-        // Get diamond with 
+        // Get diamond with provided ID
+        #[ink(message)]
+        pub fn get_diamond(&mut self, diamond_id: u32) -> Diamond {
+            assert!(
+                self.diamonds.contains(&diamond_id),
+                "Diamond with this ID not registered"
+            );
+
+            self.diamonds.get(&diamond_id).unwrap()
+        }
+
+        // transfer diamond with provided ID to new owner
+        #[ink(message)]
+        pub fn transfer_ownership(&mut self, diamond_id: u32, new_owner: AccountId, new_location: String) -> Diamond {
+            assert!(
+                self.diamonds.contains(&diamond_id),
+                "Diamond with this ID not registered"
+            );
+
+            let mut diamond = self.diamonds.get(&diamond_id).unwrap();
+
+            let ownership_change = OwnershipChange {
+                previous_owner: diamond.current_owner,
+                previous_location: diamond.purchase_location,
+                timestamp: Self::env().block_timestamp(),
+            };
+
+            // check AccountId is not same as current owner
+            assert!(
+                diamond.current_owner != new_owner,
+                "New owner cannot be the same as current owner"
+            );
+
+            // check new location is not empty
+            assert!(
+                new_location != String::default(),
+                "New location cannot be empty"
+            );
+
+            diamond.current_owner = new_owner;
+            diamond.purchase_location = new_location;
+            diamond.ownership_history.push(ownership_change);
+
+            // update diamond in storage
+            self.diamonds.insert(&diamond_id, &diamond);
+
+            diamond
+        }
     }
 
     /// Unit tests in Rust are normally defined within such a `#[cfg(test)]`
