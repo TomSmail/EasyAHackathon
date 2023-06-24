@@ -1,3 +1,72 @@
+// Import the required dependencies for polkadot interaction
+const { ApiPromise, Keyring } = require('@polkadot/api');
+const { WsProvider } = require('@polkadot/rpc-provider');
+
+const locationsDict = new Map([
+    ["Cypress", [35.126413,33.429859]],
+    ["Belgium", [50.503887,4.469936]],
+    ["France", [46.227638,2.213749]],
+    ["Morocco", [31.791702,-7.09262]],
+    ["UK", [55.378051,-3.435973]],
+]);
+
+// Draws the map of previouse owners of a specific diamond
+function displayDiamondHistory(diamond) {
+    var prev = null;
+    diamond.ownership_history.forEach((OwnershipChange) => {
+        var latLon = locationsDict.get(OwnershipChange.previous_location);
+        if (prev != null) {
+            var cur = plotPoint(latLon[0], latLon[1], "", "", "");
+            drawArc(cur, prev);
+            prev = cur;
+        } else {
+            prev = plotPoint(latLon[0], latLon[1], "", "", "");
+        }
+    });
+}
+
+
+async function main() {
+
+    // Connect to the local Substrate node
+    const provider = new WsProvider('ws://localhost:9944');
+    const api = await ApiPromise.create({ provider });
+  
+    // Set the account that will interact with the contract
+    const keyring = new Keyring({ type: 'sr25519' });
+    const alice = keyring.addFromUri('//Alice', { name: 'Alice' });
+  
+    // Retrieve the contract instance
+    const contractAddress = '0x1234567890abcdef'; // Replace with the actual contract address
+    const contract = await api.query.contract.contractAt(contractAddress);
+  
+    // Retrieve the diamonds hashmap
+    const diamonds = await contract.diamonds.entries();
+  
+    // Loop through the diamonds hashmap entries
+    // diamonds.forEach(([diamondId, diamond]) => {
+    //   console.log('Diamond ID:', diamondId.toNumber());
+    //   console.log('Diamond:', diamond.toHuman());
+    //   console.log('------------------------');
+    // });
+    // Prints each diamonds history
+
+    // diamonds.forEach(([diamondId, diamond]) => {
+    //     displayDiamondHistory(diamond);
+    // })
+
+    displayDiamondHistory(diamonds.get(userInput));
+    // Disconnect from the Substrate node
+    provider.disconnect();
+  }
+  
+  main().catch(console.error);
+
+
+
+// MAP:
+
+
 // Initialise Map
 var map = L.map('map').setView([35, 13], 4);
 
