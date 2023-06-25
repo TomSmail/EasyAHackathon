@@ -1,1 +1,3 @@
 *.DS_Store
+/diamond-ui/node_modules
+/diamond-ui/build

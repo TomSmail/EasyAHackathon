@@ -1,0 +1,152 @@
+body {
+  margin: 0;
+}
+
+.mac-book-pro-16-1,
+.mac-book-pro-16-1 * {
+  box-sizing: border-box;
+}
+.mac-book-pro-16-1 {
+  background: #ffffff;
+  width: 1264px;
+  height: 1117px;
+  position: relative;
+  overflow: hidden;
+}
+.diamond-profile-frame {
+  width: 1272px;
+  height: 219px;
+  position: absolute;
+  left: 0px;
+  top: 753px;
+  overflow: hidden;
+}
+.footer-frame {
+  width: 1272px;
+  height: 100px;
+  position: absolute;
+  left: calc(50% - 636px);
+  top: calc(50% - -413.5px);
+}
+.footer {
+  background: #52616b;
+  width: 1272px;
+  height: 100px;
+  position: absolute;
+  left: 0px;
+  top: 50px;
+}
+.twitter-logo {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 110px;
+  top: 75px;
+}
+.messanger-logo {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 182px;
+  top: 75px;
+}
+.facebook-logo {
+  width: 55px;
+  height: 58.17px;
+  position: absolute;
+  left: 254px;
+  top: 67px;
+}
+.insta-logo {
+  width: 50px;
+  height: 50.27px;
+  position: absolute;
+  left: 40px;
+  top: 75px;
+}
+.navbar-frame {
+  width: 1272px;
+  height: 100px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+.nav-bar {
+  background: #52616b;
+  width: 1272px;
+  height: 100px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+.home {
+  color: #f9e6e6;
+  text-align: center;
+  font: 400 24px "Inter", sans-serif;
+  position: absolute;
+  left: calc(50% - -176px);
+  top: calc(50% - 23px);
+  width: 124px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.record {
+  color: #f9e6e6;
+  text-align: center;
+  font: 400 24px "Inter", sans-serif;
+  position: absolute;
+  left: calc(50% - -320px);
+  top: calc(50% - 23px);
+  width: 124px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contact {
+  color: #f9e6e6;
+  text-align: center;
+  font: 400 24px "Inter", sans-serif;
+  position: absolute;
+  left: calc(50% - -464px);
+  top: calc(50% - 24px);
+  width: 124px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo-1 {
+  width: 124.4px;
+  height: 100px;
+  position: absolute;
+  left: calc(50% - 636px);
+  top: calc(50% - 51px);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+.map-frame {
+  width: 1272px;
+  height: 514px;
+  position: absolute;
+  left: 0px;
+  top: 300px;
+  overflow: hidden;
+}
+.page-title-frame {
+  width: 1272px;
+  height: 100px;
+  position: absolute;
+  left: 0px;
+  top: 150px;
+  overflow: hidden;
+}
+.diamond-history {
+  color: #52616b;
+  text-align: left;
+  font: 400 30px "Inter", sans-serif;
+  position: absolute;
+  left: calc(50% - 122px);
+  top: 32px;
+}
