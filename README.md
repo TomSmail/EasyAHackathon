@@ -1,0 +1,11 @@
+**Know Your Diamond**
+
+![image](https://github.com/TomSmail/EasyAHackathon/assets/67635582/70d2dc2b-dc23-4aea-ac47-0940c21e7a7c)
+
+**The Problem**
+
+The purpose of the project is to create a transparent dApp for customers to verify the origin and sourcing of diamonds. This will help to enforce better ethics standards and working conditions in the diamond industry, which has historically been dogged with issues of clandestine abuses and exploitation. The end result is that the user can go to our site and search for the ID of a specific diamond, and then view its entire history, from source to present day ownership, and thus make and informed decision about its ethics. The project makes use of many features from both Polkadot and Astar - the security of Polkadot, smart contracts, the ability to record transactions on a blockchain, the ability to integrate a JS frontend using Polkadot JS. We also used Shibuya, part of the Astar network, to deploy our overall dApp.
+
+**The Solution**
+
+We decided to leverage the power of Polkadot by creating a smart contract in Ink! and Rust. This contract had extensive functionality - a new diamond could be registered, its origin and ethics standards could be verified, and it could be transferred from owner to owner. Blocks in a blockchain have traditionally functioned as ledgers, where transactions can be recorded. We used this ability to allow all the transactions of a diamond to be placed on a permanent record, freely visible to everyone. This ability to have smart contracts and to have an immutable, secure record of transactions (using the security that Polkadot provides and everyone else can rely on) would not have been possible without Polkadot. Separately, we built a frontend website so users could view the history of a specific diamond in a clear and intuitive way. This frontend was initially designed in HTML and CSS. However, we soon upgraded this to React to allow us to easily integrate an interactive map to show the precise past of the diamond's ownership. Finally, we changed it to NextJS, as interconnecting React with the smart contract was proving difficult. Using NextJS allowed us to interface between the two more easily. We then merged the frontend with the Polkadot JS API.  Finally, we deployed the whole dApp on Shibuya, an Astar platform
