@@ -5,6 +5,10 @@ const SearchBarWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const SearchBarContainer = styled.div`
@@ -34,6 +38,7 @@ const SearchInput = styled.input`
   flex-grow: 1;
   padding: 10px;
   font-size: 16px;
+  background-color: transparent;
 
   &:focus {
     outline: none;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const MapWrapper = styled.div`
-  /* margin-bottom: 20px; */
+  margin: 75px;
 `;
 
 const styles = { MapWrapper };

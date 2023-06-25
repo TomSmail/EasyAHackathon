@@ -5,6 +5,7 @@ const NavBarWrapper = styled.div`
   height: 80px;
   justify-content: space-between;
   background-color: #52616b;
+  position: relative;
 
   img {
     height: 80px;
