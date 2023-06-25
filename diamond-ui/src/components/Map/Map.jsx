@@ -2,6 +2,17 @@ import React, { useEffect } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import styles from "./Map.styles";
+import { ApiPromise, WsProvider } from "@polkadot/api";
+
+// const connectWebsocket = () => {
+//   const wsProvider = new WsProvider("wss://rpc.shibuya.astar.network");
+//   ApiPromise.create({ provider: wsProvider }).then((api) => {
+//     console.log(api.genesisHash.toHex());
+//     api.query.contract
+//       .contractAt("YgRGqHz4Q4AA1YDSFtPvq1mvAMT1uP5w4MbyWnMCn5NVJGy")
+//       .then((response) => console.log(response));
+//   });
+// };
 
 export const Map = () => {
   useEffect(() => {
