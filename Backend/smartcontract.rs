@@ -163,8 +163,8 @@ pub mod diamond_traceability {
                 .get(&diamond_id)
                 .expect("Diamond with this ID does not exist");
 
-            // Example responsible sourcing criteria: Diamond should be from conflict-free sources
-            diamond.origin == "Conflict-free"
+            // Example responsible sourcing criteria: Diamond should be from a country
+            diamond.origin == "Botswana" || diamond.origin == "Canada"
         }
 
         // Check if the diamond's labor practices are fair
