@@ -133,6 +133,78 @@ pub mod contract {
 
             diamond
         }
+
+        // check_certification of diamond 
+        pub fn check_certifications(&self, diamond_id: u32) -> bool {
+            assert!(
+                self.diamonds.contains(&diamond_id),
+                "Diamond with this ID not registered"
+            );
+
+            let diamond = self.diamonds.get(&diamond_id).unwrap();
+
+            diamond.certifications.contains("GIA") || diamond.certifications.contains("AGS")
+        }
+
+        // check_responsibly_sourced of diamond
+        pub fn check_responsible_sourcing(&self, diamond_id: u32) -> bool {
+            assert!(
+                self.diamonds.contains(&diamond_id),
+                "Diamond with this ID not registered"
+            );
+
+            let diamond = self.diamonds.get(&diamond_id).unwrap();
+            // Example responsible sourcing criteria: Diamond should be from conflict-free sources
+            diamond.is_responsibly_sourced
+        }
+
+        // check fair labor practices of diamond
+        pub fn check_fair_labor_practices(&self, diamond_id: u32) -> bool {
+            assert!(
+                self.diamonds.contains(&diamond_id),
+                "Diamond with this ID not registered"
+            );
+
+            let diamond = self.diamonds.get(&diamond_id).unwrap();
+            
+            // Example fair labor practices criteria: Diamond should be from sources that do not use child labor
+            diamond.has_fair_labor_practices
+        }
+
+        // check weight of diamond more than 0
+        pub fn check_weight(&self, diamond_id: u32) -> bool {
+            assert!(
+                self.diamonds.contains(&diamond_id),
+                "Diamond with this ID not registered"
+            );
+
+            let diamond = self.diamonds.get(&diamond_id).unwrap();
+
+            diamond.weight > 0
+        }
+
+
+        #[ink(message)]
+        pub fn check_compliance(&self, diamond_id: u32) -> bool {
+            assert!(
+                self.diamonds.contains(&diamond_id),
+                "Diamond with this ID not registered"
+            );
+
+            let diamond = self.diamonds.get(&diamond_id).unwrap();
+            
+            // Check if all compliance criteria are met
+            let certifications_valid = self.check_certifications(diamond_id);
+            let responsible_sourcing_valid = self.check_responsible_sourcing(diamond_id);
+            let fair_labor_practices_valid = self.check_fair_labor_practices(diamond_id);
+            let weight_valid = self.check_weight(diamond_id);
+
+            // Return true if all criteria are valid, false otherwise
+            certifications_valid
+                && responsible_sourcing_valid
+                && fair_labor_practices_valid
+                && weight_valid
+        }
     }
 
     /// Unit tests in Rust are normally defined within such a `#[cfg(test)]`
